@@ -11,7 +11,12 @@ export class ChildComponent {
         this.onChanged.emit(increased);
     }
     @Input() userName: string = "";
+    @Output() userNameChange = new EventEmitter<string>();
     _userAge: number = 0;
+    onNameChange(model: string){
+        this.userName = model;
+        this.userNameChange.emit(model);
+    }
     @Input()
     set userAge(age:number) {
         if(age<0)

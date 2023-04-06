@@ -1,6 +1,7 @@
 <div class="page-header">
     <child-comp 
     [userName]="name" 
+    [(userName)] = "name"
     [userAge]="age"
     (onChanged)="onChanged($event)"
     >

@@ -1,6 +1,7 @@
 <ng-content></ng-content>
 <h2>Добро пожаловать {{ name }}!</h2>
 <p>Имя пользователя: {{userName}}</p>
+<input [ngModel]="userName" (ngModelChange)="onNameChange($event)" />
 <p>Возраст пользователя: {{userAge}}</p>
 <button (click)="change(true)">+</button>
 <button (click)="change(false)">-</button>
