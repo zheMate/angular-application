@@ -18,6 +18,7 @@ class Item {
 })
 export class AppComponent {
     text: string = "";
+    name: string = "Вася";
     price: number = 0;
     items: Item[] =
         [
