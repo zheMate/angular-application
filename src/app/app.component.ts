@@ -18,6 +18,10 @@ class Item {
 })
 export class AppComponent {
     text: string = "";
+    clicks:number = 0;
+    onChanged(increased:any){
+        increased == true?this.clicks++:this.clicks--;
+    }
     age: number = 24;
     name: string = "Вася";
     price: number = 0;
