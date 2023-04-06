@@ -1,5 +1,8 @@
 <div class="page-header">
-    <child-comp><h2>Добро пожаловать {{ name }} !</h2></child-comp>
+    <child-comp [userName]="name" [userAge]="age">
+        <input type="text" [(ngModel)]="age"/>
+        <h2>Добро пожаловать {{ name }} !</h2>
+    </child-comp>
     <h1>Привет {{ name }}</h1>
     <h2> Список покупок </h2>
 </div>
