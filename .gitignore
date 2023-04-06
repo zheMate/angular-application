@@ -1,2 +1,10 @@
 /node_modules
 /.angular
+.env
+.DS_Store
+*.log
+*.swp
+*.swo
+/coverage
+/build
+/dist
