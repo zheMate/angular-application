@@ -7,12 +7,25 @@
     <h2>Количество кликов: {{ clicks }}</h2>
     <h2>Имя пользователя: {{ user?.cozyName }}</h2>
     <h2>Возраст пользователя: {{ user?.cozyAge }}</h2>
+    <h1>{{ this.httpService.errorMessage }}</h1>
     <ul>
         <li *ngFor="let user of users">
             <p>Имя пользователя: {{ user?.cozyName }}</p>
             <p>Возраст пользователя: {{ user?.cozyAge }}</p>
         </li>
     </ul>
+    <div *ngIf="done">Сумма = {{sum}}</div>
+    <div class="form-group">
+        <label>Введите первое число</label>
+        <input class="form-control" type="number" name="num1" [(ngModel)]="num1" />
+    </div>
+    <div class="form-group">
+        <label>Введите второе число</label>
+        <input class="form-control" type="number" name="num2" [(ngModel)]="num2" />
+    </div>
+    <div class="form-group">
+        <button class="btn btn-default" (click)="submit()">Отправить</button>
+    </div>
     <h1>AppModule</h1>
     <data-comp></data-comp>
     <h2> Список покупок </h2>
@@ -72,7 +85,7 @@
         </select>
     </div>
     <div class="form-group">
-        <button class="btn btn-default" >Добавить</button>
+        <button class="btn btn-default">Добавить</button>
     </div>
 </div>
 <div>
@@ -87,7 +100,7 @@
         <div class="form-group">
             <label>Имя</label>
             <input class="form-control" name="name" formControlName="userName" />
-             
+
             <div class="alert alert-danger"
                 *ngIf="myForm.controls['userName'].invalid && myForm.controls['userName'].touched">
                 Не указано имя
@@ -96,7 +109,7 @@
         <div class="form-group">
             <label>Email</label>
             <input class="form-control" name="email" formControlName="userEmail" />
-             
+
             <div class="alert alert-danger"
                 *ngIf="myForm.controls['userEmail'].invalid && myForm.controls['userEmail'].touched">
                 Некорректный email

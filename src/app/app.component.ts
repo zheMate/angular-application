@@ -34,9 +34,14 @@ export class AppComponent implements OnInit {
     price: number = 0;
     company: string = "";
     myForm: FormGroup;
+    num1: number = 0;
+    num2: number = 0;
+    sum: number | undefined;
+    done:boolean = false;
     user: User;
     users: User[] = [];
-    constructor(private httpService: HttpService) {
+    error: any;
+    constructor(public httpService: HttpService) {
         this.myForm = new FormGroup({
             "userName": new FormControl("Tom", [Validators.required]), 
             "userEmail": new FormControl("", [
@@ -60,6 +65,10 @@ export class AppComponent implements OnInit {
         (<FormArray>this.myForm.controls["phones"]).push(new FormControl("+7", Validators.required));
     }
     submit() {
+        this.httpService.getSum(this.num1, this.num2).subscribe({next:(data:any) => {
+            this.sum = data.result;
+            this.done = true;
+        }});
         console.log(this.myForm);
     }
     userNameValidator(control: FormControl): {[s: string]:boolean}|null {
