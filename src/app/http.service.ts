@@ -17,6 +17,10 @@ export class HttpService {
     getJSONData(link: string) {
         return this.http.get(link);
     }
+    postData(user: User){
+        const body = {cozyName: user.cozyName, cozyAge: user.cozyAge};
+        return this.http.post('http://localhost:3000/postuser', body);
+    }
     getUsers() : Observable<User[]> {
         return this.http.get('assets/usersP.json').pipe(map((data:any)=> {
             let cozyList = data["cozyList"];

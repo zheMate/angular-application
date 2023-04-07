@@ -38,7 +38,8 @@ export class AppComponent implements OnInit {
     num2: number = 0;
     sum: number | undefined;
     done:boolean = false;
-    user: User;
+    user: User = new User("", 0);
+    receivedUser: User | undefined;
     users: User[] = [];
     error: any;
     constructor(public httpService: HttpService) {
@@ -64,11 +65,16 @@ export class AppComponent implements OnInit {
     addPhones() {
         (<FormArray>this.myForm.controls["phones"]).push(new FormControl("+7", Validators.required));
     }
-    submit() {
+    submit(user: User) {
         this.httpService.getSum(this.num1, this.num2).subscribe({next:(data:any) => {
             this.sum = data.result;
             this.done = true;
         }});
+        this.httpService.postData(user)
+        .subscribe({
+            next:(data: any) => {this.receivedUser = data; this.done = true;},
+            error: error => console.log(error)
+        });
         console.log(this.myForm);
     }
     userNameValidator(control: FormControl): {[s: string]:boolean}|null {
