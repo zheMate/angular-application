@@ -51,6 +51,7 @@ export class AppComponent implements OnInit {
     ngOnInit(){
         this.httpService.getJSONData('assets/user.json').subscribe({next:(data:any)=>this.user=new User(data.cozyName, data.cozyAge)});
         this.httpService.getJSONData('assets/users.json').subscribe({next:(data:any)=>this.users = data["cozyList"]});
+        this.httpService.getUsers().subscribe({next:(data: User[]) => this.users=data});
     }
     getFormsControls() : FormArray{
         return this.myForm.controls['phones'] as FormArray;
