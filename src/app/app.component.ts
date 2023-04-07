@@ -6,8 +6,13 @@ export class Phone {
     constructor(
         public title: string,
         public price: number,
-        public company: string)
-    { }
+        public company: string) { }
+}
+
+export class User {
+    constructor(public name: string,
+        public email: string,
+        public phone: string) { }
 }
 
 class Item {
@@ -30,16 +35,20 @@ export class AppComponent {
     title: string = "";
     price: number = 0;
     company: string = "";
+    user: User = new User("", "", "");
+    addUser() {
+        console.log(this.user);
+    }
     phone: Phone = new Phone("", 0, "");
     companies: string[] = ["Apple", "Huawei", "Xiaomi", "Samsung", "LG", "Motorola", "Alcatel"];
-    addPhone(title:NgModel, price: NgModel, comp: NgModel) {
+    addPhone(title: NgModel, price: NgModel, comp: NgModel) {
         console.log(title);
         console.log(price);
         console.log(comp);
     }
-    onTitleChange(){
-        if(this.phone.title == "нет")
-        this.phone.title = "неизвестно";
+    onTitleChange() {
+        if (this.phone.title == "нет")
+            this.phone.title = "неизвестно";
     }
     text: string = "";
     clicks: number = 0;
