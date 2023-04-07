@@ -4,9 +4,10 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { ChildComponent } from './child.component';
 import { DataModule } from './data/data.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-    imports: [ BrowserModule, FormsModule, DataModule],
+    imports: [ BrowserModule, FormsModule, DataModule, ReactiveFormsModule],
     declarations: [ AppComponent, ChildComponent ],
     bootstrap: [ AppComponent ]
 })

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NgForm, NgModel } from '@angular/forms';
+import { Form, FormArray, FormControl, FormGroup, NgForm, NgModel, Validators } from '@angular/forms';
 
 
 export class Phone {
@@ -30,19 +30,44 @@ export class AppComponent {
     title: string = "";
     price: number = 0;
     company: string = "";
+    myForm: FormGroup;
+    constructor() {
+        this.myForm = new FormGroup({
+            "userName": new FormControl("Tom", [Validators.required]), 
+            "userEmail": new FormControl("", [
+                Validators.required,
+                Validators.email
+            ]),
+            "phones": new FormArray([
+                new FormControl("+7", Validators.required)
+            ])
+        });
+    }
+    getFormsControls() : FormArray{
+        return this.myForm.controls['phones'] as FormArray;
+    }
+    addPhones() {
+        (<FormArray>this.myForm.controls["phones"]).push(new FormControl("+7", Validators.required));
+    }
+    submit() {
+        console.log(this.myForm);
+    }
+    userNameValidator(control: FormControl): {[s: string]:boolean}|null {
+        if(control.value === "нет"){
+            return { "UserName": true };
+        }
+        return null;
+    }
     userName: string = "";
     userEmail: string = "";
     userPhone: string = "";
-    onSubmit(form: NgForm){
+
+    onSubmit(form: NgForm) {
         console.log(form);
     }
     phone: Phone = new Phone("", 0, "");
     companies: string[] = ["Apple", "Huawei", "Xiaomi", "Samsung", "LG", "Motorola", "Alcatel"];
-    addPhone(title: NgModel, price: NgModel, comp: NgModel) {
-        console.log(title);
-        console.log(price);
-        console.log(comp);
-    }
+   
     onTitleChange() {
         if (this.phone.title == "нет")
             this.phone.title = "неизвестно";
