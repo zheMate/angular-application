@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NgModel } from '@angular/forms';
+import { NgForm, NgModel } from '@angular/forms';
 
 
 export class Phone {
@@ -9,11 +9,6 @@ export class Phone {
         public company: string) { }
 }
 
-export class User {
-    constructor(public name: string,
-        public email: string,
-        public phone: string) { }
-}
 
 class Item {
     purchase: string;
@@ -35,9 +30,11 @@ export class AppComponent {
     title: string = "";
     price: number = 0;
     company: string = "";
-    user: User = new User("", "", "");
-    addUser() {
-        console.log(this.user);
+    userName: string = "";
+    userEmail: string = "";
+    userPhone: string = "";
+    onSubmit(form: NgForm){
+        console.log(form);
     }
     phone: Phone = new Phone("", 0, "");
     companies: string[] = ["Apple", "Huawei", "Xiaomi", "Samsung", "LG", "Motorola", "Alcatel"];

@@ -1,10 +1,6 @@
 <div class="page-header">
-    <child-comp 
-
-    [userAge]="age"
-    (onChanged)="onChanged($event)"
-    >
-        <input type="text" [(ngModel)]="age"/>
+    <child-comp [userAge]="age" (onChanged)="onChanged($event)">
+        <input type="text" [(ngModel)]="age" />
         <h2>Добро пожаловать {{ name }} !</h2>
     </child-comp>
     <h1>Привет {{ name }}</h1>
@@ -49,19 +45,20 @@
     </table>
 </div>
 
-<div class="col-xs-10"> 
+<div class="col-xs-10">
     <div class="form-group">
         <label>Название модели</label>
-        <input class="form-control" name="title" [(ngModel)]="phone.title" #phoneTitle="ngModel" (ngModelChange)="onTitleChange()" />
+        <input class="form-control" name="title" [(ngModel)]="phone.title" #phoneTitle="ngModel"
+            (ngModelChange)="onTitleChange()" />
     </div>
     <div class="form-group">
         <label>Цена</label>
-        <input type="number" class="form-control" name="price" [(ngModel)]="phone.price" #phonePrice="ngModel"/>
+        <input type="number" class="form-control" name="price" [(ngModel)]="phone.price" #phonePrice="ngModel" />
     </div>
     <div class="form-group">
         <label>Производитель</label>
         <select class="form-control" name="company" [(ngModel)]="phone.company" #phoneCompany="ngModel">
-            <option  *ngFor="let comp of companies" [value]="comp">
+            <option *ngFor="let comp of companies" [value]="comp">
                 {{comp}}
             </option>
         </select>
@@ -70,37 +67,34 @@
         <button class="btn btn-default" (click)="addPhone(phoneTitle, phonePrice, phoneCompany)">Добавить</button>
     </div>
 </div>
-<div><h3>Добавленные элементы</h3>
+<div>
+    <h3>Добавленные элементы</h3>
     <p>{{ phoneTitle.name }} : {{ phoneTitle.model }}</p>
     <p>{{ phonePrice.name }} : {{ phonePrice.model }}</p>
     <p>{{ phoneCompany.name }} : {{ phoneCompany.model }}</p>
 </div>
 
-<div class="col-xs-10"> 
-    <div class="form-group">
-        <label>Имя</label>
-        <input class="form-control" name="name" [(ngModel)]="user.name" #name="ngModel" required />
-        <div [hidden]="name.valid || name.untouched" class="alert alert-danger">
-          Не указано имя
+<div class="col-xs-10">
+    <form #myForm="ngForm" novalidate (ngSubmit)="onSubmit(myForm)">
+        <div class="form-group">
+            <label>Имя</label>
+            <input class="form-control" name="userName" ngModel required />
         </div>
-    </div>
-    <div class="form-group">
-        <label>Email</label>
-        <input class="form-control" type="email" name="email" [(ngModel)]="user.email" #email="ngModel" 
-            required email  />
-        <div [hidden]="email.valid || email.untouched" class="alert alert-danger">
-          Некорректный email
+        <div class="form-group">
+            <label>Email</label>
+            <input class="form-control" name="userEmail" ngModel 
+                required email />
         </div>
-    </div>
-    <div class="form-group">
-        <label>Телефон</label>
-        <input class="form-control" name="phone" [(ngModel)]="user.phone" #phone="ngModel" 
-            required pattern="[0-9]{11}" />
-        <div [hidden]="phone.valid || phone.untouched" class="alert alert-danger">
-          Некорректный телефон
+        <div class="form-group">
+            <label>Телефон</label>
+            <input class="form-control" name="userPhone" ngModel 
+                required pattern="[0-9]{10}" />
         </div>
-    </div>
-    <div class="form-group">
-        <button [disabled]="name.invalid || email.invalid || phone.invalid" class="btn btn-default" (click)="addUser()">Добавить</button>
-    </div>
+        <div class="form-group">
+            <input type="submit" [disabled]="myForm.invalid" class="btn btn-default" value="Отправить">
+        </div>
+    </form>
+    <div>Имя: {{ myForm.value.name }}</div>
+    <div>Телефон: {{ myForm.value.phone }}</div>
+    <div>Email: {{ myForm.value.email }}</div>
 </div>
