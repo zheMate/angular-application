@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { HttpService } from './http.service';
+import { User } from './user';
 import { Form, FormArray, FormControl, FormGroup, NgForm, NgModel, Validators } from '@angular/forms';
 
 
@@ -24,14 +26,17 @@ class Item {
 @Component({
     selector: 'my-app',
     templateUrl: './app.component.html',
-    styleUrls: ['./app.component.css']
+    styleUrls: ['./app.component.css'],
+    providers: [HttpService]
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
     title: string = "";
     price: number = 0;
     company: string = "";
     myForm: FormGroup;
-    constructor() {
+    user: User;
+    users: User[] = [];
+    constructor(private httpService: HttpService) {
         this.myForm = new FormGroup({
             "userName": new FormControl("Tom", [Validators.required]), 
             "userEmail": new FormControl("", [
@@ -42,6 +47,10 @@ export class AppComponent {
                 new FormControl("+7", Validators.required)
             ])
         });
+    }
+    ngOnInit(){
+        this.httpService.getJSONData('assets/user.json').subscribe({next:(data:any)=>this.user=new User(data.cozyName, data.cozyAge)});
+        this.httpService.getJSONData('assets/users.json').subscribe({next:(data:any)=>this.users = data["cozyList"]});
     }
     getFormsControls() : FormArray{
         return this.myForm.controls['phones'] as FormArray;

@@ -5,6 +5,14 @@
     </child-comp>
     <h1>Привет {{ name }}</h1>
     <h2>Количество кликов: {{ clicks }}</h2>
+    <h2>Имя пользователя: {{ user?.cozyName }}</h2>
+    <h2>Возраст пользователя: {{ user?.cozyAge }}</h2>
+    <ul>
+        <li *ngFor="let user of users">
+            <p>Имя пользователя: {{ user?.cozyName }}</p>
+            <p>Возраст пользователя: {{ user?.cozyAge }}</p>
+        </li>
+    </ul>
     <h1>AppModule</h1>
     <data-comp></data-comp>
     <h2> Список покупок </h2>

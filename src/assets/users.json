@@ -1,0 +1,16 @@
+{
+    "cozyList": [
+        {
+            "cozyName": "Helga",
+            "cozyAge": 5
+        },
+        {
+            "cozyName": "Oleg",
+            "cozyAge": 12
+        },
+        {
+            "cozyName": "Bob",
+            "cozyAge": 9
+        }
+    ]
+}
